@@ -1,5 +1,6 @@
 package nom.brunokarpo.microservices.springcloud.lab1
 
+import nom.brunokarpo.microservices.springcloud.lab1.model.Player
 import nom.brunokarpo.microservices.springcloud.lab1.model.Team
 import nom.brunokarpo.microservices.springcloud.lab1.repository.TeamRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,11 +16,19 @@ class Lab1Application {
 
     @PostConstruct
     fun initDatabase() {
+        val playerTeam = setOf(
+                Player("Big Easy", "Showman"),
+                Player("Buckets", "Guard"),
+                Player("Dizzy", "Guard")
+        )
+
+        val team = Team("Harlem", "Globetrotters")
+        team.players = playerTeam
+
+        val team1 = Team("Washington", "Generals")
+
         teamRepository!!.saveAll(
-                listOf(
-                        Team("Harlem", "Globetrotters"),
-                        Team("Washington", "Generals")
-                )
+                listOf( team, team1)
         )
     }
 }
