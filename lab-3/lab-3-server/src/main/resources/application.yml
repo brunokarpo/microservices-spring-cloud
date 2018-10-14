@@ -3,8 +3,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/brunokarpo/microservices-spring-cloud
-          search-paths: ConfigData
+          uri: https://github.com/brunokarpo/config-repository-test
 
 server:
   port: 8001
