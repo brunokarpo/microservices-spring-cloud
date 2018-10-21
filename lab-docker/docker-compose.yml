@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  config-server:
+    image: brunokarpo/lab-4-config-server:0.0.1-SNAPSHOT
+    ports:
+      - "8001:8001"
