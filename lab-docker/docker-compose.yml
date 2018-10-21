@@ -5,3 +5,9 @@ services:
     image: brunokarpo/lab-4-config-server:0.0.1-SNAPSHOT
     ports:
       - "8001:8001"
+  eureka-server:
+    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8010:8010"
+    depends_on:
+      - config-server
