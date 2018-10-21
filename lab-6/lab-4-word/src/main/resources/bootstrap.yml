@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: lab-4
+
+  cloud:
+    config:
+      uri: http://config-server:8001
+
+eureka:
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
