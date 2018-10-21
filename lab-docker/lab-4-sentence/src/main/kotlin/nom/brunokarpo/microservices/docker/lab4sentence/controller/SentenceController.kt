@@ -26,7 +26,7 @@ class SentenceController {
 
     private fun getWord(service: String): String {
         var list = client.getInstances(service)
-        if (list.isNotEmpty()) {
+        if (list != null && list.size > 0) {
             var uri = list.get(0).uri
             if (uri != null) {
                 return (RestTemplate()).getForObject(uri, String::class.java)!!
