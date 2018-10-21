@@ -1,5 +1,7 @@
 package nom.brunokarpo.microservices.docker.lab4.controller
 
+import nom.brunokarpo.microservices.docker.lab4.service.WordService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -7,14 +9,12 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-class WordController {
-
-    @Value("\${words}")
-    private lateinit var words: Array<String>
+class WordController @Autowired constructor(
+        private val wordService: WordService) {
 
     @GetMapping
     fun getWord(): ResponseEntity<String> {
-        var word = words.get(Random().nextInt(words.size))
+        var word = wordService.getWord()
         return ResponseEntity.ok(word)
     }
 }
