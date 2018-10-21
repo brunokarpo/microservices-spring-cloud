@@ -97,6 +97,18 @@ services:
       - "eureka-primary"
       - "eureka-secondary"
       - "eureka-tertiary"
+  word-noun-cold:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint:
+    - "java"
+    - "-jar"
+    - "-Dspring.profiles.active=cold-noun"
+    - "/app/lab-4-word.jar"
+    depends_on:
+    - "config-server"
+    - "eureka-primary"
+    - "eureka-secondary"
+    - "eureka-tertiary"
   sentence-client:
     image: brunokarpo/lab-4-sentence:0.0.1-SNAPSHOT
     ports:
