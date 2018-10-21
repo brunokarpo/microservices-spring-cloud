@@ -61,3 +61,15 @@ services:
     depends_on:
       - "config-server"
       - "eureka-server"
+  sentence-client:
+    image: brunokarpo/lab-4-sentence:0.0.1-SNAPSHOT
+    ports:
+      - "8020:8020"
+    depends_on:
+      - "config-server"
+      - "eureka-server"
+      - "word-subject"
+      - "word-verb"
+      - "word-article"
+      - "word-adjective"
+      - "word-noun"
