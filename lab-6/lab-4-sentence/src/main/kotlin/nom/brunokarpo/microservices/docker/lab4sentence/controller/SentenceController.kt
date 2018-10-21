@@ -16,12 +16,12 @@ class SentenceController {
 
     @GetMapping("/sentence")
     fun getSentence(): ResponseEntity<String> {
-        var sentence: String = "SOME SENTENCES\n\n" +
-                "${sentenceService.buildSentence()}\n" +
-                "${sentenceService.buildSentence()}\n" +
-                "${sentenceService.buildSentence()}\n" +
-                "${sentenceService.buildSentence()}\n" +
-                "${sentenceService.buildSentence()}\n"
+        var sentence: String = "SOME SENTENCES<br/><br/>" +
+                "${sentenceService.buildSentence()}<br/>" +
+                "${sentenceService.buildSentence()}<br/>" +
+                "${sentenceService.buildSentence()}<br/>" +
+                "${sentenceService.buildSentence()}<br/>" +
+                "${sentenceService.buildSentence()}<br/>"
         return ResponseEntity.ok(sentence)
     }
 

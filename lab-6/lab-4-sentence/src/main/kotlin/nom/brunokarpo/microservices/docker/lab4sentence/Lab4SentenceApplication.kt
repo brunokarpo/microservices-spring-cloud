@@ -9,13 +9,7 @@ import org.springframework.web.client.RestTemplate
 
 @SpringBootApplication
 @EnableDiscoveryClient
-class Lab4SentenceApplication {
-
-    @Bean @LoadBalanced
-    fun restTemplate(): RestTemplate {
-        return RestTemplate()
-    }
-}
+class Lab4SentenceApplication
 
 fun main(args: Array<String>) {
     runApplication<Lab4SentenceApplication>(*args)

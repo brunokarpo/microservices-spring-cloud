@@ -1,5 +1,6 @@
 package nom.brunokarpo.microservices.docker.lab4.controller
 
+import nom.brunokarpo.microservices.docker.lab4.model.Word
 import nom.brunokarpo.microservices.docker.lab4.service.WordService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -13,7 +14,7 @@ class WordController @Autowired constructor(
         private val wordService: WordService) {
 
     @GetMapping
-    fun getWord(): ResponseEntity<String> {
+    fun getWord(): ResponseEntity<Word> {
         var word = wordService.getWord()
         return ResponseEntity.ok(word)
     }
