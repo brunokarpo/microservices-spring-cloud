@@ -1,17 +1,17 @@
 package nom.brunokarpo.microservices.docker.lab4sentence.controller
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cloud.client.discovery.DiscoveryClient
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
+import org.springframework.web.client.getForObject
 
 @RestController
 class SentenceController {
 
     @Autowired
-    private lateinit var client: DiscoveryClient
+    private lateinit var restTemplate: RestTemplate
 
     @GetMapping("/sentence")
     fun getSentence(): ResponseEntity<String> {
@@ -25,13 +25,6 @@ class SentenceController {
     }
 
     private fun getWord(service: String): String {
-        var list = client.getInstances(service)
-        if (list != null && list.size > 0) {
-            var uri = list.get(0).uri
-            if (uri != null) {
-                return (RestTemplate()).getForObject(uri, String::class.java)!!
-            }
-        }
-        return ""
+        return restTemplate.getForObject("http://${service}", String::class.java) ?: ""
     }
 }
