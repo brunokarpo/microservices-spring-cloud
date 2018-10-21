@@ -1,0 +1,113 @@
+version: '3'
+services:
+  config-server:
+    image: brunokarpo/lab-4-config-server:0.0.1-SNAPSHOT
+    ports:
+      - "8001:8001"
+  eureka-primary:
+    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8011:8011"
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=primary"
+      - "/app/eureka-server.jar"
+    depends_on:
+      - config-server
+  eureka-secondary:
+    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8012:8012"
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=secondary"
+      - "/app/eureka-server.jar"
+    depends_on:
+      - config-server
+  eureka-tertiary:
+    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8013:8013"
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=tertiary"
+      - "/app/eureka-server.jar"
+    depends_on:
+      - config-server
+  word-subject:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=subject"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-primary"
+      - "eureka-secondary"
+      - "eureka-tertiary"
+  word-verb:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=verb"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-primary"
+      - "eureka-secondary"
+      - "eureka-tertiary"
+  word-adjective:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=adjective"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-primary"
+      - "eureka-secondary"
+      - "eureka-tertiary"
+  word-article:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=article"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-primary"
+      - "eureka-secondary"
+      - "eureka-tertiary"
+  word-noun:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=noun"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-primary"
+      - "eureka-secondary"
+      - "eureka-tertiary"
+  sentence-client:
+    image: brunokarpo/lab-4-sentence:0.0.1-SNAPSHOT
+    ports:
+      - "8020:8020"
+    depends_on:
+      - "config-server"
+      - "eureka-primary"
+      - "eureka-secondary"
+      - "eureka-tertiary"
+      - "word-subject"
+      - "word-verb"
+      - "word-article"
+      - "word-adjective"
+      - "word-noun"
