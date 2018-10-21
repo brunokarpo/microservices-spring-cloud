@@ -5,10 +5,37 @@ services:
     image: brunokarpo/lab-4-config-server:0.0.1-SNAPSHOT
     ports:
       - "8001:8001"
-  eureka-server:
+  eureka-primary:
     image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
     ports:
-      - "8010:8010"
+      - "8011:8011"
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=primary"
+      - "/app/eureka-server.jar"
+    depends_on:
+      - config-server
+  eureka-secondary:
+    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8012:8012"
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=secondary"
+      - "/app/eureka-server.jar"
+    depends_on:
+      - config-server
+  eureka-tertiary:
+    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8013:8013"
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=tertiary"
+      - "/app/eureka-server.jar"
     depends_on:
       - config-server
   word-subject:
