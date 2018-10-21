@@ -11,3 +11,53 @@ services:
       - "8010:8010"
     depends_on:
       - config-server
+  word-subject:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=subject"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-server"
+  word-verb:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=verb"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-server"
+  word-adjective:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=adjective"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-server"
+  word-article:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=article"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-server"
+  word-noun:
+    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=noun"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "config-server"
+      - "eureka-server"
