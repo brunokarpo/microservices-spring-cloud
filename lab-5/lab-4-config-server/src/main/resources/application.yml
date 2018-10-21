@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/brunokarpo/config-repository-test
+
+server:
+  port: 8001
