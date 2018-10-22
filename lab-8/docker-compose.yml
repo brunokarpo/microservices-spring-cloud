@@ -2,8 +2,6 @@ version: '3'
 services:
   rabbitmq-server:
     image: rabbitmq:3.7.8
-    ports:
-      - "5672:5672"
   config-server:
     image: brunokarpo/lab-4-config-server
     ports:
