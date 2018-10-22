@@ -10,7 +10,7 @@ services:
       - "8001:8001"
     depends_on:
       - rabbitmq-server
-  eureka-primary:
+  eureka-server:
     image: brunokarpo/lab-4-eureka-server
     ports:
       - "8010:8010"
@@ -28,10 +28,7 @@ services:
       - "-Dspring.profiles.active=subject"
       - "/app/lab-4-word.jar"
     depends_on:
-      - "config-server"
-      - "eureka-primary"
-      - "eureka-secondary"
-      - "eureka-tertiary"
+      - "eureka-server"
   word-verb:
     image: brunokarpo/lab-4
     entrypoint: 
@@ -40,10 +37,7 @@ services:
       - "-Dspring.profiles.active=verb"
       - "/app/lab-4-word.jar"
     depends_on:
-      - "config-server"
-      - "eureka-primary"
-      - "eureka-secondary"
-      - "eureka-tertiary"
+      - "eureka-server"
   word-adjective:
     image: brunokarpo/lab-4
     entrypoint: 
@@ -52,10 +46,7 @@ services:
       - "-Dspring.profiles.active=adjective"
       - "/app/lab-4-word.jar"
     depends_on:
-      - "config-server"
-      - "eureka-primary"
-      - "eureka-secondary"
-      - "eureka-tertiary"
+      - "eureka-server"
   word-article:
     image: brunokarpo/lab-4
     entrypoint: 
@@ -64,10 +55,7 @@ services:
       - "-Dspring.profiles.active=article"
       - "/app/lab-4-word.jar"
     depends_on:
-      - "config-server"
-      - "eureka-primary"
-      - "eureka-secondary"
-      - "eureka-tertiary"
+      - "eureka-server"
   word-noun:
     image: brunokarpo/lab-4
     entrypoint: 
@@ -76,31 +64,12 @@ services:
       - "-Dspring.profiles.active=noun"
       - "/app/lab-4-word.jar"
     depends_on:
-      - "config-server"
-      - "eureka-primary"
-      - "eureka-secondary"
-      - "eureka-tertiary"
-  word-noun-cold:
-    image: brunokarpo/lab-4
-    entrypoint:
-    - "java"
-    - "-jar"
-    - "-Dspring.profiles.active=cold-noun"
-    - "/app/lab-4-word.jar"
-    depends_on:
-    - "config-server"
-    - "eureka-primary"
-    - "eureka-secondary"
-    - "eureka-tertiary"
+      - "eureka-server"
   sentence-client:
     image: brunokarpo/lab-4-sentence
     ports:
       - "8020:8020"
     depends_on:
-      - "config-server"
-      - "eureka-primary"
-      - "eureka-secondary"
-      - "eureka-tertiary"
       - "word-subject"
       - "word-verb"
       - "word-article"
