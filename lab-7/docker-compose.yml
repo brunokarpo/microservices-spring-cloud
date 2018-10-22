@@ -1,11 +1,11 @@
 version: '3'
 services:
   config-server:
-    image: brunokarpo/lab-4-config-server:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4-config-server
     ports:
       - "8001:8001"
   eureka-primary:
-    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4-eureka-server
     ports:
       - "8011:8011"
     entrypoint: 
@@ -16,7 +16,7 @@ services:
     depends_on:
       - config-server
   eureka-secondary:
-    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4-eureka-server
     ports:
       - "8012:8012"
     entrypoint: 
@@ -27,7 +27,7 @@ services:
     depends_on:
       - config-server
   eureka-tertiary:
-    image: brunokarpo/lab-4-eureka-server:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4-eureka-server
     ports:
       - "8013:8013"
     entrypoint: 
@@ -38,7 +38,7 @@ services:
     depends_on:
       - config-server
   word-subject:
-    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4
     entrypoint: 
       - "java"
       - "-jar"
@@ -50,7 +50,7 @@ services:
       - "eureka-secondary"
       - "eureka-tertiary"
   word-verb:
-    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4
     entrypoint: 
       - "java"
       - "-jar"
@@ -62,7 +62,7 @@ services:
       - "eureka-secondary"
       - "eureka-tertiary"
   word-adjective:
-    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4
     entrypoint: 
       - "java"
       - "-jar"
@@ -74,7 +74,7 @@ services:
       - "eureka-secondary"
       - "eureka-tertiary"
   word-article:
-    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4
     entrypoint: 
       - "java"
       - "-jar"
@@ -86,7 +86,7 @@ services:
       - "eureka-secondary"
       - "eureka-tertiary"
   word-noun:
-    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4
     entrypoint: 
       - "java"
       - "-jar"
@@ -98,7 +98,7 @@ services:
       - "eureka-secondary"
       - "eureka-tertiary"
   word-noun-cold:
-    image: brunokarpo/lab-4:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4
     entrypoint:
     - "java"
     - "-jar"
@@ -110,7 +110,7 @@ services:
     - "eureka-secondary"
     - "eureka-tertiary"
   sentence-client:
-    image: brunokarpo/lab-4-sentence:0.0.1-SNAPSHOT
+    image: brunokarpo/lab-4-sentence
     ports:
       - "8020:8020"
     depends_on:

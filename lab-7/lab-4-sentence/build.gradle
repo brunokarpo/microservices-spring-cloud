@@ -43,7 +43,7 @@ repositories {
 }
 
 docker {
-    imageVersion = "${version}"
+    imageVersion = "latest"
     dockerRepository = "brunokarpo"
 }
 
