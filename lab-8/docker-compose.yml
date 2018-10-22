@@ -1,39 +1,22 @@
 version: '3'
 services:
+  rabbitmq-server:
+    image: rabbitmq:3.7.8
+    ports:
+      - "5672:5672"
   config-server:
     image: brunokarpo/lab-4-config-server
     ports:
       - "8001:8001"
+    depends_on:
+      - rabbitmq-server
   eureka-primary:
     image: brunokarpo/lab-4-eureka-server
     ports:
-      - "8011:8011"
+      - "8010:8010"
     entrypoint: 
       - "java"
       - "-jar"
-      - "-Dspring.profiles.active=primary"
-      - "/app/eureka-server.jar"
-    depends_on:
-      - config-server
-  eureka-secondary:
-    image: brunokarpo/lab-4-eureka-server
-    ports:
-      - "8012:8012"
-    entrypoint: 
-      - "java"
-      - "-jar"
-      - "-Dspring.profiles.active=secondary"
-      - "/app/eureka-server.jar"
-    depends_on:
-      - config-server
-  eureka-tertiary:
-    image: brunokarpo/lab-4-eureka-server
-    ports:
-      - "8013:8013"
-    entrypoint: 
-      - "java"
-      - "-jar"
-      - "-Dspring.profiles.active=tertiary"
       - "/app/eureka-server.jar"
     depends_on:
       - config-server

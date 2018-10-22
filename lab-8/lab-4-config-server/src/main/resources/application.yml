@@ -4,6 +4,13 @@ spring:
       server:
         git:
           uri: https://github.com/brunokarpo/config-repository-test
+  rabbitmq:
+    addresses: http://rabbitmq-server:5672/
 
 server:
   port: 8001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
