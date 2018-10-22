@@ -1,6 +1,8 @@
 package nom.brunokarpo.microservices.docker.lab4sentence.service.impl
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand
 import nom.brunokarpo.microservices.docker.lab4sentence.dao.*
+import nom.brunokarpo.microservices.docker.lab4sentence.domain.Word
 import nom.brunokarpo.microservices.docker.lab4sentence.service.WordService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -14,23 +16,38 @@ class WordServiceImpl @Autowired constructor(
         private val nounClient: NounClient
 ): WordService {
 
-    override fun getSubject(): String {
-        return subjectClient.getWord().word
+    @HystrixCommand(fallbackMethod = "getFallbackSubject")
+    override fun getSubject(): Word {
+        return subjectClient.getWord()
     }
 
-    override fun getVerb(): String {
-        return verbClient.getWord().word
+    override fun getVerb(): Word {
+        return verbClient.getWord()
     }
 
-    override fun getArticle(): String {
-        return articleClient.getWord().word
+    override fun getArticle(): Word {
+        return articleClient.getWord()
     }
 
-    override fun getAdjective(): String {
-        return adjectiveClient.getWord().word
+    @HystrixCommand(fallbackMethod = "getFallbackAdjective")
+    override fun getAdjective(): Word {
+        return adjectiveClient.getWord()
     }
 
-    override fun getNoun(): String {
-        return nounClient.getWord().word
+    @HystrixCommand(fallbackMethod = "getFallbackNoun")
+    override fun getNoun(): Word {
+        return nounClient.getWord()
+    }
+
+    private fun getFallbackSubject(): Word {
+        return Word("Someone")
+    }
+
+    private fun getFallbackAdjective(): Word {
+        return Word("")
+    }
+
+    private fun getFallbackNoun(): Word {
+        return Word("something")
     }
 }

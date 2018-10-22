@@ -12,10 +12,10 @@ class SentenceServiceImpl @Autowired constructor(
 ): SentenceService {
 
     override fun buildSentence(): String {
-        return "${wordService.getSubject()} " +
-                "${wordService.getVerb()} " +
-                "${wordService.getArticle()} " +
-                "${wordService.getAdjective()} " +
-                "${wordService.getNoun()}."
+        return "${wordService.getSubject().word} " +
+                "${wordService.getVerb().word} " +
+                "${wordService.getArticle().word} " +
+                "${wordService.getAdjective().word} " +
+                "${wordService.getNoun().word}."
     }
 }

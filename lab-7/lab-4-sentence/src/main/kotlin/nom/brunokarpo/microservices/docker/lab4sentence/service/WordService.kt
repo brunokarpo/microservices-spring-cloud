@@ -1,10 +1,12 @@
 package nom.brunokarpo.microservices.docker.lab4sentence.service
 
+import nom.brunokarpo.microservices.docker.lab4sentence.domain.Word
+
 interface WordService {
 
-    fun getSubject(): String
-    fun getVerb(): String
-    fun getArticle(): String
-    fun getAdjective(): String
-    fun getNoun(): String
+    fun getSubject(): Word
+    fun getVerb(): Word
+    fun getArticle(): Word
+    fun getAdjective(): Word
+    fun getNoun(): Word
 }
