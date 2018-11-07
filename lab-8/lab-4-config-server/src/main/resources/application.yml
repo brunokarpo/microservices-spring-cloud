@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/brunokarpo/config-repository-test
+  rabbitmq:
+    host: rabbitmq-server
+
+server:
+  port: 8001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
