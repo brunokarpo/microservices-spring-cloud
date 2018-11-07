@@ -1,0 +1,75 @@
+version: '3'
+services:
+  rabbitmq-server:
+    image: rabbitmq:3.7.8
+  config-server:
+    image: brunokarpo/lab-4-config-server
+    ports:
+      - "8001:8001"
+    depends_on:
+      - rabbitmq-server
+  eureka-server:
+    image: brunokarpo/lab-4-eureka-server
+    ports:
+      - "8010:8010"
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "/app/eureka-server.jar"
+    depends_on:
+      - config-server
+  word-subject:
+    image: brunokarpo/lab-4
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=subject"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "eureka-server"
+  word-verb:
+    image: brunokarpo/lab-4
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=verb"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "eureka-server"
+  word-adjective:
+    image: brunokarpo/lab-4
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=adjective"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "eureka-server"
+  word-article:
+    image: brunokarpo/lab-4
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=article"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "eureka-server"
+  word-noun:
+    image: brunokarpo/lab-4
+    entrypoint: 
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=noun"
+      - "/app/lab-4-word.jar"
+    depends_on:
+      - "eureka-server"
+  sentence-client:
+    image: brunokarpo/lab-4-sentence
+    ports:
+      - "8020:8020"
+    depends_on:
+      - "word-subject"
+      - "word-verb"
+      - "word-article"
+      - "word-adjective"
+      - "word-noun"
