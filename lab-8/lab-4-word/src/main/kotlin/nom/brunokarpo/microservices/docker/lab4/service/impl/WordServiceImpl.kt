@@ -3,10 +3,12 @@ package nom.brunokarpo.microservices.docker.lab4.service.impl
 import nom.brunokarpo.microservices.docker.lab4.model.Word
 import nom.brunokarpo.microservices.docker.lab4.service.WordService
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.cloud.context.config.annotation.RefreshScope
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
+@RefreshScope
 class WordServiceImpl(
         @Value("\${words}")
         private var words: Array<String>
